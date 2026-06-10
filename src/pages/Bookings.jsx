@@ -7,12 +7,19 @@ const Bookings = () => {
   const [students, setStudents] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [showModal, setShowModal] = useState(false);
+<<<<<<< HEAD
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     studentId: '',
     roomId: '',
     checkInDate: new Date().toISOString().split('T')[0],
+=======
+  const [formData, setFormData] = useState({
+    studentId: '',
+    roomId: '',
+    checkInDate: '',
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
   });
 
   useEffect(() => {
@@ -20,8 +27,11 @@ const Bookings = () => {
   }, []);
 
   const fetchData = async () => {
+<<<<<<< HEAD
     setLoading(true);
     setError(null);
+=======
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
     try {
       const [bookingsRes, studentsRes, roomsRes] = await Promise.all([
         bookingAPI.getAll(),
@@ -33,9 +43,12 @@ const Bookings = () => {
       setRooms(roomsRes.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+<<<<<<< HEAD
       setError('Failed to fetch data. Please make sure the backend is running.');
     } finally {
       setLoading(false);
+=======
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
     }
   };
 
@@ -52,8 +65,12 @@ const Bookings = () => {
       fetchData();
     } catch (error) {
       console.error('Error creating booking:', error);
+<<<<<<< HEAD
       const errorMessage = error.response?.data || 'Error creating booking';
       alert(errorMessage);
+=======
+      alert('Error creating booking');
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
     }
   };
 
@@ -121,6 +138,7 @@ const Bookings = () => {
         </button>
       </div>
 
+<<<<<<< HEAD
       {loading ? (
         <div style={styles.loading}>Loading bookings...</div>
       ) : error ? (
@@ -184,6 +202,57 @@ const Bookings = () => {
           </table>
         </div>
       )}
+=======
+      <div style={styles.card}>
+        <table style={styles.table}>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Room</th>
+              <th>Check-in Date</th>
+              <th>Check-out Date</th>
+              <th>Status</th>
+              <th>Payment</th>
+              <th>Amount</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((booking) => (
+              <tr key={booking.id}>
+                <td>{booking.student?.name || 'N/A'}</td>
+                <td>{booking.room?.roomNumber || 'N/A'}</td>
+                <td>{booking.checkInDate}</td>
+                <td>{booking.checkOutDate || 'N/A'}</td>
+                <td>
+                  <span style={getStatusBadgeStyle(booking.status)}>
+                    {booking.status}
+                  </span>
+                </td>
+                <td>
+                  <span style={getPaymentStatusBadgeStyle(booking.paymentStatus)}>
+                    {booking.paymentStatus}
+                  </span>
+                </td>
+                <td>${booking.totalAmount?.toFixed(2) || '0.00'}</td>
+                <td>
+                  {booking.status === 'ACTIVE' && (
+                    <>
+                      <button onClick={() => handleCancel(booking.id)} style={styles.btnCancel}>
+                        <X size={16} />
+                      </button>
+                      <button onClick={() => handleCheckout(booking.id)} style={styles.btnCheckout}>
+                        <LogOut size={16} />
+                      </button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
 
       {showModal && (
         <div style={styles.modalOverlay}>
@@ -288,6 +357,7 @@ const styles = {
   btnIcon: {
     marginRight: '5px',
   },
+<<<<<<< HEAD
   loading: {
     textAlign: 'center',
     padding: '40px',
@@ -303,6 +373,8 @@ const styles = {
     border: '1px solid #f5c6cb',
     marginBottom: '20px',
   },
+=======
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
   modalOverlay: {
     position: 'fixed',
     top: 0,

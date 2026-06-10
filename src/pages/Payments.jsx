@@ -20,22 +20,32 @@ const Payments = () => {
 
   const fetchData = async () => {
     try {
+<<<<<<< HEAD
       console.log('Fetching payments and bookings...');
+=======
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
       const [paymentsRes, bookingsRes] = await Promise.all([
         paymentAPI.getAll(),
         bookingAPI.getActive(),
       ]);
+<<<<<<< HEAD
       console.log('Payments received:', paymentsRes.data);
+=======
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
       setPayments(paymentsRes.data);
       setBookings(bookingsRes.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+<<<<<<< HEAD
       alert('Error fetching data from server. Please check the console.');
+=======
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     if (!formData.bookingId) {
       alert('Please select a booking');
       return;
@@ -55,6 +65,16 @@ const Payments = () => {
       const response = await paymentAPI.create(paymentData);
       console.log('Payment created successfully:', response.data);
       
+=======
+    try {
+      await paymentAPI.create({
+        booking: { id: formData.bookingId },
+        amount: formData.amount,
+        paymentMethod: formData.paymentMethod,
+        transactionId: formData.transactionId,
+        remarks: formData.remarks,
+      });
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
       setShowModal(false);
       setFormData({
         bookingId: '',
@@ -66,8 +86,12 @@ const Payments = () => {
       fetchData();
     } catch (error) {
       console.error('Error creating payment:', error);
+<<<<<<< HEAD
       const message = error.response?.data || 'Error creating payment';
       alert(message);
+=======
+      alert('Error creating payment');
+>>>>>>> 32993696b8fd1981784ffc923792ac49917dce4c
     }
   };
 
